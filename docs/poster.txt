@@ -1,5 +1,7 @@
 title:
 Mene incepto desistere victam
+body:
+Mene incepto desistere victam,nec posse Italia Teucrorum avertere regem?
 Introduction:
 Urbs antīqua fuit, Tyriī tenuēre colōnī,Karthāgō, Ītaliam contrā Tiberīnaque longēōstia, dīves opum studiīsque asperrima bellī,quam Iūnō fertur terrīs magis omnibus ūnamposthabitā coluisse Samō; hīc illius arma,hīc currus 
 Methods:
