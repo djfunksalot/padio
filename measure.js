@@ -58,7 +58,7 @@ if (req.params.id == 'current') {
 		//console.log('Data:', data);
 	});
 } else {
-	redis.lrange(req.params.id, 0, -1, function (err, data) {
+	redis.lrange(req.params.id, 0, 18000, function (err, data) {
 		if (err) {
 			console.log('Redis error:', err);
 			return;

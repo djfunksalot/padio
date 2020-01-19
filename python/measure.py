@@ -33,7 +33,6 @@ class Job(threading.Thread):
  
         while not self.shutdown_flag.is_set():
             # ... Job code here ...
-            print('Trueeeeee!')
             time.sleep(0.5)
  
         # ... Clean shutdown code here ...
@@ -88,7 +87,7 @@ redisClient = redis.StrictRedis(host='localhost',port=6379,db=0)
 #
 #stop and measure for this many steps at inflection point
 #inflection_voltage = 2
-inflection_voltage =  5
+inflection_voltage =  80
 inflection_steps = 5000
 goofy = False
 simulate = False
@@ -97,16 +96,16 @@ arange = 5;
 aref = 'diff'
 num_scans = 10
 vmin = 0.0
-vmax = 10.0
-stepsize =  0.25
-vbias = 0.14
+vmax = 5.0
+stepsize =  1
+vbias = 0.1
 chansupply = 1
 vsupply = 5
 #which channel is used for bias
 chanbias = 2
 cycles = 1
 #bias resistor value
-rbias=940000
+rbias=2224000
 
 
 #XDLD-1 working range
@@ -118,13 +117,15 @@ rbias=940000
 #AQSP working range
 #ARSG working range
 #devrange = [1,2,3,4,5,6,7,8,9]
+#devrange = [1,5,9,15,17,24,27]
 #ARSG-1 working range
 #devrange = [19,20,22,23,26,27]
 #KQHH working range
-devrange = [8,12,14,16,19,21,22,23,25]
+#devrange = [12,16,19,21,22,23,25]
+#devrange = [8,12,14,16,19,21,22,23,25]
 ##devrange =[19,20,21,22,23,24,25,26,27]
 #devrange = [1,2,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]
-#,devrange = range(1,28)
+devrange = range(1,28)
 #devrange = range(1,10)
 #BXQC working range
 #devrange =[19,20,22,23,25,26,27]
@@ -137,6 +138,11 @@ devrange = [8,12,14,16,19,21,22,23,25]
 #devrange = [19,20,22,23,24,25,26,27]
 #KIWS working range
 #devrange = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]
+# PLMM
+#devrange = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27]
+#devrange = [1,2,3,4,5,6,7,8,9]
+#CHUK
+#devrange = [3]
 def sweep(vmin,vmax,stepsize):
     vlist = []
     for vout in np.arange(vmin, vmax, stepsize):
@@ -234,6 +240,7 @@ def measure():
     run={'epoch':epoch,'run_id':run_id,'chip_id':chip_id,'vmin':vmin,'vmax':vmax,'stepsize':stepsize,'vbias':vbias,'rbias':rbias,'inflection_voltage':inflection_voltage}
     redisClient.lpush('runs',json.dumps(run))
     hw=hardware.Hw()
+    print('redis')
     hw.start()
     hw.setV(chansupply,vsupply)
     hw.setV(chanbias,vbias)
